@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PurchyFlow</string>
+    <string name="notification_listener_title">SMS &amp; Text Message Access</string>
+    <string name="notification_listener_desc">Grant permission to automatically parse incoming sugarcane Purchy tokens and weighment receipts in the background.</string>
+    <string name="grant_permission">Enable Access</string>
+    <string name="active_tokens">Active Tokens</string>
+    <string name="dispatched_receipts">Dispatched Receipts</string>
+    <string name="export_excel">Export to Excel</string>
+    <string name="search_hint">Search by Grower, Purchy No, Society…</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_green">#1B5E20</color>
+    <color name="primary_green_dark">#003300</color>
+    <color name="accent_gold">#FFB300</color>
+    <color name="background_light">#F8FAF8</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="urgency_today">#D32F2F</color>
+    <color name="urgency_one_day">#F57C00</color>
+    <color name="urgency_two_day">#388E3C</color>
+    <color name="urgency_expired">#757575</color>
+    <color name="ic_launcher_background">#0E2228</color>
+</resources>
