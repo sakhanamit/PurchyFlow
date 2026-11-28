@@ -1,6 +1,8 @@
 package com.sugarcane.purchyflow.ui.screens
 
+import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import com.sugarcane.purchyflow.data.model.TokenStatus
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,6 +44,7 @@ import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Scale
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Sync
+import androidx.compose.material.icons.filled.SystemUpdate
 import androidx.compose.material.icons.filled.UploadFile
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.AlertDialog
@@ -380,6 +383,43 @@ fun HomeScreen(
                                 onClick = {
                                     showOverflowMenu = false
                                     showWelcomeDialog = true
+                                }
+                            )
+
+                            HorizontalDivider(color = Color(0xFFF1F5F9))
+
+                            // 5. One-Click App Update (GitHub)
+                            DropdownMenuItem(
+                                text = {
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(
+                                            imageVector = Icons.Default.SystemUpdate,
+                                            contentDescription = null,
+                                            tint = ModernTonalEmerald,
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(12.dp))
+                                        Column {
+                                            Text("Update App (GitHub)", fontWeight = FontWeight.SemiBold, fontSize = 14.sp, color = TextPrimary)
+                                            Text("One-click latest APK download", fontSize = 11.sp, color = TextSecondary)
+                                        }
+                                    }
+                                },
+                                onClick = {
+                                    showOverflowMenu = false
+                                    try {
+                                        val updateIntent = Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse("https://github.com/sakhanamit/PurchyFlow/raw/main/PurchyFlow-release.apk")
+                                        )
+                                        context.startActivity(updateIntent)
+                                    } catch (e: Exception) {
+                                        Toast.makeText(
+                                            context,
+                                            "Unable to open GitHub download link",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 }
                             )
                         }
