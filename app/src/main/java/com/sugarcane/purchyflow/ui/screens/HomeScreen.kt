@@ -207,37 +207,37 @@ fun HomeScreen(
                     }
                 },
                 actions = {
-                    // Prominent Total Weight Counter in Top Right
+                    // Glassmorphic Total Weight Counter in Top Right
                     val totalDispWeight = dispatchedTokens.sumOf { it.actualNettedWeightNumber ?: 0.0 }
                     Surface(
-                        shape = RoundedCornerShape(12.dp),
-                        color = Color(0xFF064E3B),
-                        border = BorderStroke(1.2.dp, Color(0xFF34D399)),
+                        shape = RoundedCornerShape(14.dp),
+                        color = Color(0x28FFFFFF),
+                        border = BorderStroke(1.dp, Color(0x556EE7B7)),
                         modifier = Modifier.padding(end = 4.dp)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 9.dp, vertical = 5.dp)
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Scale,
                                 contentDescription = "Total Net Weight",
                                 tint = Color(0xFF6EE7B7),
-                                modifier = Modifier.size(16.dp)
+                                modifier = Modifier.size(15.dp)
                             )
                             Spacer(modifier = Modifier.width(5.dp))
                             Text(
                                 text = String.format(Locale.ENGLISH, "%.1f", totalDispWeight),
-                                fontSize = 16.5.sp,
-                                fontWeight = FontWeight.Black,
+                                fontSize = 15.5.sp,
+                                fontWeight = FontWeight.ExtraBold,
                                 color = Color.White,
-                                letterSpacing = 0.4.sp
+                                letterSpacing = 0.3.sp
                             )
                             Spacer(modifier = Modifier.width(3.dp))
                             Text(
                                 text = "ql",
                                 fontSize = 11.sp,
-                                fontWeight = FontWeight.Bold,
+                                fontWeight = FontWeight.SemiBold,
                                 color = Color(0xFFA7F3D0)
                             )
                         }
@@ -414,19 +414,24 @@ fun HomeScreen(
                 .padding(innerPadding)
         ) {
             // ==========================================
-            // Modern Segmented Pill Navigation Tabs
+            // Modern Gradient Segmented Pill Navigation Tabs
             // ==========================================
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(WhatsAppGreen)
-                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                    .clip(RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp))
+                    .background(
+                        androidx.compose.ui.graphics.Brush.verticalGradient(
+                            colors = listOf(WhatsAppGreen, Color(0xFF044635))
+                        )
+                    )
+                    .padding(start = 12.dp, end = 12.dp, top = 4.dp, bottom = 12.dp)
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(14.dp))
-                        .background(Color(0xFF044635))
+                        .background(Color(0x33000000))
                         .padding(4.dp),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
@@ -562,7 +567,7 @@ fun HomeScreen(
                 onGrantClick = onRequestSmsPermission
             )
 
-            // Modern Elevated Search Pill
+            // Modern Squircle Search Bar
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -572,10 +577,10 @@ fun HomeScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(42.dp)
-                        .clip(RoundedCornerShape(22.dp))
+                        .height(44.dp)
+                        .clip(RoundedCornerShape(14.dp))
                         .background(Color.White)
-                        .border(1.dp, WhatsAppDivider, RoundedCornerShape(22.dp))
+                        .border(1.dp, Color(0xFFE2E8F0), RoundedCornerShape(14.dp))
                         .padding(horizontal = 14.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {

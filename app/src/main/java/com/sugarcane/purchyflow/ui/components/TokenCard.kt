@@ -146,193 +146,187 @@ fun TokenCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 4.dp)
+            .padding(horizontal = 12.dp, vertical = 5.dp)
             .clickable { isExpanded = !isExpanded }
             .animateContentSize(),
-        shape = RoundedCornerShape(14.dp),
+        shape = RoundedCornerShape(18.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.5.dp),
         border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFE2E8F0))
     ) {
         Column(modifier = Modifier.fillMaxWidth()) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 11.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 14.dp, vertical = 13.dp),
+            verticalAlignment = Alignment.Top
         ) {
             // ==========================================
-            // WhatsApp Contact Avatar (48dp circle)
+            // Modern Squircle Tonal Avatar (46dp)
             // ==========================================
             Box(
                 modifier = Modifier
+                    .padding(top = 2.dp)
                     .size(46.dp)
-                    .clip(CircleShape)
+                    .clip(RoundedCornerShape(14.dp))
                     .background(
-                        if (isDispatched) Color(0xFFE0F2F1) else Color(0xFFE7F7EF)
+                        androidx.compose.ui.graphics.Brush.linearGradient(
+                            colors = if (isDispatched) {
+                                listOf(Color(0xFFE6FFFA), Color(0xFFCCFBF1))
+                            } else {
+                                listOf(Color(0xFFECFDF5), Color(0xFFD1FAE5))
+                            }
+                        )
                     )
                     .border(
-                        1.2.dp,
-                        if (isDispatched) DispatchedTeal.copy(alpha = 0.4f) else Color(0xFF25D366).copy(alpha = 0.4f),
-                        CircleShape
+                        1.dp,
+                        if (isDispatched) DispatchedTeal.copy(alpha = 0.25f) else Color(0xFF10B981).copy(alpha = 0.25f),
+                        RoundedCornerShape(14.dp)
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = initials,
-                    fontSize = 17.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = if (isDispatched) DispatchedTeal else Color(0xFF075E54)
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = if (isDispatched) DispatchedTeal else WhatsAppGreen
                 )
             }
 
             Spacer(modifier = Modifier.width(12.dp))
 
             // ==========================================
-            // Center & Right Columns (WhatsApp Message Row)
+            // 3-Row Editorial Card Hierarchy
             // ==========================================
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(3.dp)
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                // Line 1: Grower Name (Left) + Date / Timestamp (Right)
+                // Row 1: Grower Name (Single Line) + Soft Date Pill (Right)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Top
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = cleanGrowerName,
                         style = MaterialTheme.typography.titleMedium.copy(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                            fontSize = 15.5.sp,
+                            fontWeight = FontWeight.Bold
                         ),
                         color = WhatsAppTextPrimary,
-                        maxLines = 2,
+                        maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.weight(1f)
                     )
 
                     Spacer(modifier = Modifier.width(8.dp))
 
-                    // Date / Timestamp (WhatsApp timestamp style)
-                    Text(
-                        text = if (isDispatched) {
-                            token.dispatchDateStr ?: token.issueDateStr
-                        } else {
-                            token.issueDateStr
-                        },
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.Normal,
-                        color = WhatsAppTextSecondary,
-                        maxLines = 1,
-                        softWrap = false
-                    )
+                    // Subtle Date Pill
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color(0xFFF1F5F9))
+                            .padding(horizontal = 7.dp, vertical = 3.dp)
+                    ) {
+                        Text(
+                            text = if (isDispatched) {
+                                token.dispatchDateStr ?: token.issueDateStr
+                            } else {
+                                token.issueDateStr
+                            },
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFF475569),
+                            maxLines = 1,
+                            softWrap = false
+                        )
+                    }
                 }
 
-                // Line 2: WhatsApp Double Checkmarks + Subtext (Left) + Badge / Chevron (Right)
+                // Row 2: Full Purchy / Mill Receipt Identifier (Full Width, No Truncation)
+                val cleanReceipt = token.weightReceiptNo
+                    ?.replace(Regex("^(?:#?MILL[-\\s]*|#)", RegexOption.IGNORE_CASE), "")
+                    ?.trim() ?: token.purchyNo
+                val codePart = if (token.growerCode.isNotBlank()) " • ${token.growerCode}" else ""
+                val idText = if (isDispatched) {
+                    if (isLinkedWithToken) {
+                        "Purchy #${token.purchyNo} • Mill #$cleanReceipt"
+                    } else if (!token.purchyNo.startsWith("TAUL-") && !token.purchyNo.startsWith("REC-")) {
+                        "Purchy #${token.purchyNo}$codePart"
+                    } else {
+                        "Mill #$cleanReceipt$codePart"
+                    }
+                } else {
+                    "Purchy #${token.purchyNo}$codePart"
+                }
+
+                Text(
+                    text = idText,
+                    fontSize = 12.5.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = WhatsAppTextSecondary,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                // Row 3: Status / Weight Badge (Left) + Expand Chevron (Right)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    // Left Subtext
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (isDispatched) {
-                            val cleanReceipt = token.weightReceiptNo
-                                ?.replace(Regex("^(?:#?MILL[-\\s]*|#)", RegexOption.IGNORE_CASE), "")
-                                ?.trim() ?: token.purchyNo
-                            val codePart = if (token.growerCode.isNotBlank()) " • ${token.growerCode}" else ""
-                            if (isLinkedWithToken) {
-                                Text(
-                                    text = "Purchy #${token.purchyNo} • Mill #${cleanReceipt}",
-                                    fontSize = 13.sp,
-                                    color = WhatsAppTextSecondary,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            } else if (!token.purchyNo.startsWith("TAUL-") && !token.purchyNo.startsWith("REC-")) {
-                                Text(
-                                    text = "Purchy #${token.purchyNo}$codePart",
-                                    fontSize = 13.sp,
-                                    color = WhatsAppTextSecondary,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            } else {
-                                Text(
-                                    text = "Mill #${cleanReceipt}$codePart",
-                                    fontSize = 13.sp,
-                                    color = WhatsAppTextSecondary,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
-                        } else {
-                            val codePart = if (token.growerCode.isNotBlank()) " • ${token.growerCode}" else ""
-                            Text(
-                                text = "Purchy #${token.purchyNo}$codePart",
-                                fontSize = 13.sp,
-                                color = WhatsAppTextSecondary,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                    if (isDispatched) {
+                        val displayWeight = token.actualNettedWeight ?: "0 ql"
+                        val cleanWeight = if (displayWeight.contains("Net", ignoreCase = true)) displayWeight else "Net: $displayWeight"
+                        ModernBadge(
+                            text = cleanWeight,
+                            textColor = DispatchedTeal,
+                            bgColor = DispatchedTealBg,
+                            borderColor = DispatchedTealBorder,
+                            icon = Icons.Default.CheckCircle
+                        )
+                    } else {
+                        when (urgencyLevel) {
+                            UrgencyLevel.EXPIRING_TODAY -> ModernBadge(
+                                text = urgencyText,
+                                textColor = UrgencyRed,
+                                bgColor = UrgencyRedBg,
+                                borderColor = UrgencyRedBorder,
+                                icon = Icons.Default.AccessTime
+                            )
+                            UrgencyLevel.ONE_DAY_LEFT -> ModernBadge(
+                                text = urgencyText,
+                                textColor = UrgencyAmber,
+                                bgColor = UrgencyAmberBg,
+                                borderColor = UrgencyAmberBorder,
+                                icon = Icons.Default.AccessTime
+                            )
+                            UrgencyLevel.TWO_DAYS_LEFT -> ModernBadge(
+                                text = urgencyText,
+                                textColor = UrgencyGreen,
+                                bgColor = UrgencyGreenBg,
+                                borderColor = UrgencyGreenBorder,
+                                icon = Icons.Default.AccessTime
+                            )
+                            UrgencyLevel.EXPIRED -> ModernBadge(
+                                text = "Expired",
+                                textColor = UrgencyGrey,
+                                bgColor = UrgencyGreyBg,
+                                borderColor = UrgencyGreyBorder,
+                                icon = Icons.Default.AccessTime
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.width(6.dp))
-
-                    // Right Badge / Status Pill
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        if (isDispatched) {
-                            val displayWeight = token.actualNettedWeight ?: "0 ql"
-                            val cleanWeight = if (displayWeight.contains("Net", ignoreCase = true)) displayWeight else "Net: $displayWeight"
-                            ModernBadge(
-                                text = cleanWeight,
-                                textColor = DispatchedTeal,
-                                bgColor = DispatchedTealBg,
-                                borderColor = DispatchedTealBorder,
-                                icon = Icons.Default.CheckCircle
-                            )
-                        } else {
-                            when (urgencyLevel) {
-                                UrgencyLevel.EXPIRING_TODAY -> ModernBadge(
-                                    text = urgencyText,
-                                    textColor = UrgencyRed,
-                                    bgColor = UrgencyRedBg,
-                                    borderColor = UrgencyRedBorder,
-                                    icon = Icons.Default.AccessTime
-                                )
-                                UrgencyLevel.ONE_DAY_LEFT -> ModernBadge(
-                                    text = urgencyText,
-                                    textColor = UrgencyAmber,
-                                    bgColor = UrgencyAmberBg,
-                                    borderColor = UrgencyAmberBorder,
-                                    icon = Icons.Default.AccessTime
-                                )
-                                UrgencyLevel.TWO_DAYS_LEFT -> ModernBadge(
-                                    text = urgencyText,
-                                    textColor = UrgencyGreen,
-                                    bgColor = UrgencyGreenBg,
-                                    borderColor = UrgencyGreenBorder,
-                                    icon = Icons.Default.AccessTime
-                                )
-                                UrgencyLevel.EXPIRED -> ModernBadge(
-                                    text = "Expired",
-                                    textColor = UrgencyGrey,
-                                    bgColor = UrgencyGreyBg,
-                                    borderColor = UrgencyGreyBorder,
-                                    icon = Icons.Default.AccessTime
-                                )
-                            }
-                        }
-
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = if (isExpanded) "Hide" else "Details",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFF94A3B8)
+                        )
+                        Spacer(modifier = Modifier.width(2.dp))
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowDown,
                             contentDescription = if (isExpanded) "Collapse" else "Expand details",
