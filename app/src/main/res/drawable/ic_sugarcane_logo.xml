@@ -1,0 +1,167 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+
+    <!-- Glowing Golden Aura / Sun of Prosperity in Background -->
+    <path
+        android:pathData="M32,32m-26,0a26,26 0,1 1,52 0a26,26 0,1 1,-52 0">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:angle="45"
+                android:startColor="#FFD54F"
+                android:centerColor="#FFA000"
+                android:endColor="#FF6F00"
+                android:type="linear" />
+        </aapt:attr>
+    </path>
+
+    <!-- Inner Emerald Circular Shield -->
+    <path
+        android:pathData="M32,32m-23,0a23,23 0,1 1,46 0a23,23 0,1 1,-46 0">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:angle="90"
+                android:startColor="#064E3B"
+                android:centerColor="#047857"
+                android:endColor="#059669"
+                android:type="linear" />
+        </aapt:attr>
+    </path>
+
+    <!-- Glassmorphic Inner Rim -->
+    <path
+        android:pathData="M32,32m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"
+        android:strokeWidth="1.2"
+        android:strokeColor="#55FFFFFF" />
+
+    <!-- Left Sugarcane Stalk (Rising & Segmented) -->
+    <!-- Bottom Segment -->
+    <path
+        android:pathData="M23,53 L23,40 L26.5,40 L26.5,53 Z"
+        android:fillColor="#10B981" />
+    <path
+        android:pathData="M22,40 L27.5,40 L27.5,38.5 L22,38.5 Z"
+        android:fillColor="#FBBF24" />
+    <!-- Middle Segment -->
+    <path
+        android:pathData="M23.2,38.5 L23.2,26 L26.3,26 L26.3,38.5 Z"
+        android:fillColor="#34D399" />
+    <path
+        android:pathData="M22.5,26 L27,26 L27,24.5 L22.5,24.5 Z"
+        android:fillColor="#FBBF24" />
+    <!-- Top Shoot -->
+    <path
+        android:pathData="M23.5,24.5 L24,15 L26,15 L26,24.5 Z"
+        android:fillColor="#6EE7B7" />
+
+    <!-- Main Center Sugarcane Stalk (Hero Stalk with rich gradient) -->
+    <!-- Bottom Segment -->
+    <path
+        android:pathData="M30,54 L30,37 L34.5,37 L34.5,54 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:angle="0"
+                android:startColor="#059669"
+                android:endColor="#10B981"
+                android:type="linear" />
+        </aapt:attr>
+    </path>
+    <!-- Node Ring 1 with Golden Accent -->
+    <path
+        android:pathData="M28.8,37 L35.7,37 L35.7,35 L28.8,35 Z"
+        android:fillColor="#F59E0B" />
+    <path
+        android:pathData="M29.5,36 L35,36"
+        android:strokeWidth="0.8"
+        android:strokeColor="#FEF3C7" />
+
+    <!-- Middle Segment -->
+    <path
+        android:pathData="M30.2,35 L30.2,20 L34.3,20 L34.3,35 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:angle="0"
+                android:startColor="#10B981"
+                android:endColor="#34D399"
+                android:type="linear" />
+        </aapt:attr>
+    </path>
+    <!-- Node Ring 2 with Golden Accent -->
+    <path
+        android:pathData="M29,20 L35.5,20 L35.5,18 L29,18 Z"
+        android:fillColor="#F59E0B" />
+    <path
+        android:pathData="M29.8,19 L34.8,19"
+        android:strokeWidth="0.8"
+        android:strokeColor="#FEF3C7" />
+
+    <!-- Top Sprout Segment -->
+    <path
+        android:pathData="M30.8,18 L31.5,8 L33.2,8 L33.8,18 Z"
+        android:fillColor="#A7F3D0" />
+
+    <!-- Right Sugarcane Stalk -->
+    <!-- Bottom Segment -->
+    <path
+        android:pathData="M38,53 L38,42 L41.2,42 L41.2,53 Z"
+        android:fillColor="#10B981" />
+    <path
+        android:pathData="M37.2,42 L42,42 L42,40.5 L37.2,40.5 Z"
+        android:fillColor="#FBBF24" />
+    <!-- Middle Segment -->
+    <path
+        android:pathData="M38.2,40.5 L38.2,28 L41,28 L41,40.5 Z"
+        android:fillColor="#34D399" />
+    <path
+        android:pathData="M37.5,28 L41.8,28 L41.8,26.5 L37.5,26.5 Z"
+        android:fillColor="#FBBF24" />
+    <!-- Top Shoot -->
+    <path
+        android:pathData="M38.5,26.5 L39.2,17 L40.8,17 L40.8,26.5 Z"
+        android:fillColor="#6EE7B7" />
+
+    <!-- Elegant Curved Cane Leaves (Graceful Archs) -->
+    <!-- Left Sweeping Leaf -->
+    <path
+        android:pathData="M23,38.5 C16,33 9,35 5,42 C10,37 18,36 23,38.5 Z"
+        android:fillColor="#A7F3D0" />
+    <path
+        android:pathData="M24,24.5 C17,18 11,20 8,27 C12,22 19,22 24,24.5 Z"
+        android:fillColor="#6EE7B7" />
+
+    <!-- Center Crown Leaves (Fanning Upwards into the Golden Sky) -->
+    <path
+        android:pathData="M31,18 C25,12 18,14 13,20 C19,15 27,15 31,18 Z"
+        android:fillColor="#6EE7B7" />
+    <path
+        android:pathData="M33.5,18 C39.5,12 46.5,14 51.5,20 C45.5,15 37.5,15 33.5,18 Z"
+        android:fillColor="#A7F3D0" />
+    <path
+        android:pathData="M32.5,8 C29,3 23,4 20,7 C24,6 29,6 32.5,8 Z"
+        android:fillColor="#ECFDF5" />
+    <path
+        android:pathData="M32.5,8 C36,3 42,4 45,7 C41,6 36,6 32.5,8 Z"
+        android:fillColor="#ECFDF5" />
+
+    <!-- Right Sweeping Leaf -->
+    <path
+        android:pathData="M41,40.5 C47,35 54,37 58,44 C53,39 46,38 41,40.5 Z"
+        android:fillColor="#A7F3D0" />
+    <path
+        android:pathData="M40.5,26.5 C47,20 53,22 56,29 C52,24 45,24 40.5,26.5 Z"
+        android:fillColor="#6EE7B7" />
+
+    <!-- Sparkle / High-Tech Flourish Dots -->
+    <path
+        android:pathData="M32,5m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0"
+        android:fillColor="#FFFFFF" />
+    <path
+        android:pathData="M16,16m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0"
+        android:fillColor="#FEF3C7" />
+    <path
+        android:pathData="M48,16m-0.8,0a0.8,0.8 0,1 1,1.6 0a0.8,0.8 0,1 1,-1.6 0"
+        android:fillColor="#FEF3C7" />
+</vector>

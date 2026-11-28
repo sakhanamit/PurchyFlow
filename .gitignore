@@ -1,0 +1,20 @@
+# Project exclude paths
+/.gradle/
+/app/build/
+/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
+/build/
+
+# Local configuration & secrets
+local.properties
+purchyflow-release.jks
+*.jks
+*.keystore
+
+# Databases
+purchy.db
+purchy_flow_dump.db
+*.db
+
+# Temporary test dumps
+ui_*.xml
+*.log
