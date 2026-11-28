@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Version-1.1.2-059669?style=for-the-badge&logo=android" alt="Version 1.1.2" />
+  <img src="https://img.shields.io/badge/Version-1.1.4-059669?style=for-the-badge&logo=android" alt="Version 1.1.4" />
   <img src="https://img.shields.io/badge/Kotlin-2.0.21-7F52FF?style=for-the-badge&logo=kotlin" alt="Kotlin" />
   <img src="https://img.shields.io/badge/Jetpack_Compose-Material_3-4285F4?style=for-the-badge&logo=jetpackcompose" alt="Jetpack Compose" />
   <img src="https://img.shields.io/badge/Architecture-MVI%20%2F%20Clean-FF6F00?style=for-the-badge" alt="Clean Architecture" />
@@ -29,7 +29,7 @@ Managing these across chaotic SMS inboxes leads to missed delivery deadlines, un
 
 ---
 
-## 🚀 Key Highlights & What's New in v1.1.2
+## 🚀 Key Highlights & What's New in v1.1.4
 
 - 🎫 **Clean Token Ledger**: The **TOKEN** tab displays only active, unexpired tokens sorted strictly on a **FIFO (First-In, First-Out)** basis by expiration date so farmers dispatch the earliest-expiring tokens first. Expired tokens are segregated automatically.
 - ⚖️ **Grower-Centric Dispatched Management**: The **DISPATCHED** tab features a live total tonnage counter (`ql`), a **Sort by Grower** dropdown menu (`A to Z` alphabetical ordering), and dynamic one-touch grower chips for instant multi-grower account auditing.
