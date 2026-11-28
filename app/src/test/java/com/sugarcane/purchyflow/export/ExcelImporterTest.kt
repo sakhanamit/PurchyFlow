@@ -75,4 +75,23 @@ class ExcelImporterTest {
         assertEquals("8002589", parsed[1].receiptNo)
         assertEquals(54.90, parsed[1].netWeight ?: 0.0, 0.001)
     }
+
+    @Test
+    fun testParseLegacyExportWithTitleAndMetadataRows_skipsBannerAndMapsHeadersCorrectly() {
+        val legacyRows = listOf(
+            listOf("PurchyFlow - Sugarcane Mill Weighment & Dispatch Report"),
+            listOf("Generated: 28/11/2026 17:08", "Total Records: 2", "Total Weight: 108.85 ql"),
+            listOf("Date", "Grower Name", "Grower Code", "Purchy No", "Mill Receipt No", "Actual Net Weight (ql)"),
+            listOf("28-11-2026", "RAMESH KUMAR", "1160/90", "105111125074", "8006013", "53.95"),
+            listOf("TOTAL", "2 Records", "", "", "", "108.85")
+        )
+
+        val parsed = ExcelImporter.parseRows(legacyRows)
+        assertEquals(1, parsed.size)
+        assertEquals("RAMESH KUMAR", parsed[0].growerName)
+        assertEquals("1160/90", parsed[0].growerCode)
+        assertEquals("105111125074", parsed[0].purchyNo)
+        assertEquals("8006013", parsed[0].receiptNo)
+        assertEquals(53.95, parsed[0].netWeight ?: 0.0, 0.001)
+    }
 }

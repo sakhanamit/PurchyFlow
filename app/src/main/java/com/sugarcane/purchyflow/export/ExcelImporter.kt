@@ -335,40 +335,69 @@ object ExcelImporter {
         var societyCol = -1
         var caneTypeCol = -1
 
-        for (i in 0 until minOf(5, rawRows.size)) {
+        for (i in 0 until minOf(8, rawRows.size)) {
             val row = rawRows[i]
+            // Skip known report title / metadata banner rows
+            val firstLower = row.firstOrNull()?.lowercase(Locale.ENGLISH)?.trim().orEmpty()
+            if (firstLower.startsWith("purchyflow") || firstLower.startsWith("generated:") || firstLower.startsWith("sugar mill")) {
+                continue
+            }
+
+            var rowNameCol = -1
+            var rowDateCol = -1
+            var rowCodeCol = -1
+            var rowPurchyCol = -1
+            var rowReceiptCol = -1
+            var rowNetWeightCol = -1
+            var rowGrossWeightCol = -1
+            var rowTareWeightCol = -1
+            var rowSocietyCol = -1
+            var rowCaneTypeCol = -1
+
             for (c in row.indices) {
                 val header = row[c].lowercase(Locale.ENGLISH).trim()
-                if (header.contains("name") || header.contains("grower") && !header.contains("code") || header.contains("कृषक") || header.contains("farmer")) {
-                    if (nameCol < 0) nameCol = c
+                if (header.isEmpty() || header.length > 40) continue
+                if (header.contains("name") || (header.contains("grower") && !header.contains("code")) || header.contains("कृषक") || header.contains("farmer")) {
+                    if (rowNameCol < 0) rowNameCol = c
                 } else if (header.contains("date") || header.contains("दिनांक") || header.contains("weighed") || header.contains("taul") || header.contains("tareekh")) {
-                    if (dateCol < 0) dateCol = c
+                    if (rowDateCol < 0) rowDateCol = c
                 } else if (header.contains("code") || header.contains("कोड") || header.contains("grower code")) {
-                    if (codeCol < 0) codeCol = c
+                    if (rowCodeCol < 0) rowCodeCol = c
                 } else if (header.contains("receipt") || header.contains("mill purchy") || header.contains("रसीद") || header.contains("ticket")) {
-                    receiptCol = c
+                    rowReceiptCol = c
                 } else if (header.contains("purchy")) {
-                    if (purchyCol < 0) purchyCol = c
+                    if (rowPurchyCol < 0) rowPurchyCol = c
                 } else if (header.contains("net") || header.contains("शुद्ध भार") || header.contains("shuddh")) {
-                    netWeightCol = c
-                } else if (header.contains("weight") && netWeightCol < 0 && !header.contains("gross") && !header.contains("tare")) {
-                    netWeightCol = c
-                } else if (header == "wt" && netWeightCol < 0) {
-                    netWeightCol = c
+                    rowNetWeightCol = c
+                } else if (header.contains("weight") && rowNetWeightCol < 0 && !header.contains("gross") && !header.contains("tare")) {
+                    rowNetWeightCol = c
+                } else if (header == "wt" && rowNetWeightCol < 0) {
+                    rowNetWeightCol = c
                 } else if (header.contains("gross") || header.contains("सकल") || header.contains("bhari")) {
-                    if (grossWeightCol < 0) grossWeightCol = c
+                    if (rowGrossWeightCol < 0) rowGrossWeightCol = c
                 } else if (header.contains("tare") || header.contains("खाली") || header.contains("khali")) {
-                    if (tareWeightCol < 0) tareWeightCol = c
+                    if (rowTareWeightCol < 0) rowTareWeightCol = c
                 } else if (header.contains("society") || header.contains("mill") || header.contains("समिति") || header.contains("centre")) {
-                    if (societyCol < 0) societyCol = c
+                    if (rowSocietyCol < 0) rowSocietyCol = c
                 } else if (header.contains("cane") || header.contains("type") || header.contains("variety") || header.contains("जाति")) {
-                    if (caneTypeCol < 0) caneTypeCol = c
+                    if (rowCaneTypeCol < 0) rowCaneTypeCol = c
                 }
             }
 
-            // If we matched at least 2 key columns, this is the header row
-            if (nameCol >= 0 || receiptCol >= 0 || purchyCol >= 0 || netWeightCol >= 0) {
+            val matchedCount = listOf(rowNameCol, rowDateCol, rowCodeCol, rowPurchyCol, rowReceiptCol, rowNetWeightCol).count { it >= 0 }
+            // Require at least 2 distinct header columns so title/metadata rows are never mistaken for headers
+            if (matchedCount >= 2) {
                 headerIndex = i
+                nameCol = rowNameCol
+                dateCol = rowDateCol
+                codeCol = rowCodeCol
+                purchyCol = rowPurchyCol
+                receiptCol = rowReceiptCol
+                netWeightCol = rowNetWeightCol
+                grossWeightCol = rowGrossWeightCol
+                tareWeightCol = rowTareWeightCol
+                societyCol = rowSocietyCol
+                caneTypeCol = rowCaneTypeCol
                 break
             }
         }

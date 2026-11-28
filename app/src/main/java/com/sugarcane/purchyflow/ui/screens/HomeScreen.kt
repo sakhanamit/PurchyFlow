@@ -434,34 +434,38 @@ fun HomeScreen(
                     val isTokensSelected = selectedTab == 0
                     Row(
                         modifier = Modifier
-                            .weight(1f)
+                            .weight(0.95f)
                             .clip(RoundedCornerShape(10.dp))
                             .background(if (isTokensSelected) Color.White else Color.Transparent)
                             .clickable { viewModel.onTabSelected(0) }
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = 8.dp, horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Text(
                             text = "TOKEN",
-                            fontSize = 12.5.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (isTokensSelected) WhatsAppGreen else Color(0xCCFFFFFF),
-                            letterSpacing = 0.4.sp
+                            letterSpacing = 0.3.sp,
+                            maxLines = 1,
+                            softWrap = false
                         )
-                        Spacer(modifier = Modifier.width(5.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(if (isTokensSelected) Color(0xFFE6F4EA) else Color(0x33FFFFFF))
-                                .padding(horizontal = 6.dp, vertical = 1.dp),
+                                .padding(horizontal = 5.dp, vertical = 1.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
                                 text = "${activeTokens.size}",
-                                fontSize = 11.sp,
+                                fontSize = 10.5.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = if (isTokensSelected) WhatsAppGreen else Color.White
+                                color = if (isTokensSelected) WhatsAppGreen else Color.White,
+                                maxLines = 1,
+                                softWrap = false
                             )
                         }
                     }
@@ -470,34 +474,38 @@ fun HomeScreen(
                     val isDispatchedSelected = selectedTab == 1
                     Row(
                         modifier = Modifier
-                            .weight(1.15f)
+                            .weight(1.28f)
                             .clip(RoundedCornerShape(10.dp))
                             .background(if (isDispatchedSelected) Color.White else Color.Transparent)
                             .clickable { viewModel.onTabSelected(1) }
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = 8.dp, horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Text(
                             text = "DISPATCHED",
-                            fontSize = 12.5.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (isDispatchedSelected) WhatsAppGreen else Color(0xCCFFFFFF),
-                            letterSpacing = 0.4.sp
+                            letterSpacing = 0.3.sp,
+                            maxLines = 1,
+                            softWrap = false
                         )
-                        Spacer(modifier = Modifier.width(5.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(10.dp))
                                 .background(if (isDispatchedSelected) Color(0xFFE6F4EA) else Color(0x33FFFFFF))
-                                .padding(horizontal = 6.dp, vertical = 1.dp),
+                                .padding(horizontal = 5.dp, vertical = 1.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
                                 text = "${dispatchedTokens.size}",
-                                fontSize = 11.sp,
+                                fontSize = 10.5.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = if (isDispatchedSelected) WhatsAppGreen else Color.White
+                                color = if (isDispatchedSelected) WhatsAppGreen else Color.White,
+                                maxLines = 1,
+                                softWrap = false
                             )
                         }
                     }
@@ -506,22 +514,24 @@ fun HomeScreen(
                     val isAuditSelected = selectedTab == 2
                     Row(
                         modifier = Modifier
-                            .weight(1f)
+                            .weight(0.92f)
                             .clip(RoundedCornerShape(10.dp))
                             .background(if (isAuditSelected) Color.White else Color.Transparent)
                             .clickable { viewModel.onTabSelected(2) }
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = 8.dp, horizontal = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
                         Text(
                             text = "AUDIT",
-                            fontSize = 12.5.sp,
+                            fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
                             color = if (isAuditSelected) WhatsAppGreen else Color(0xCCFFFFFF),
-                            letterSpacing = 0.4.sp
+                            letterSpacing = 0.3.sp,
+                            maxLines = 1,
+                            softWrap = false
                         )
-                        Spacer(modifier = Modifier.width(5.dp))
+                        Spacer(modifier = Modifier.width(4.dp))
                         Box(
                             modifier = Modifier
                                 .clip(RoundedCornerShape(10.dp))
@@ -529,15 +539,17 @@ fun HomeScreen(
                                     if (auditTokens.isNotEmpty()) Color(0xFFE53935)
                                     else if (isAuditSelected) Color(0xFFE6F4EA) else Color(0x33FFFFFF)
                                 )
-                                .padding(horizontal = 6.dp, vertical = 1.dp),
+                                .padding(horizontal = 5.dp, vertical = 1.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
                                 text = "${auditTokens.size}",
-                                fontSize = 11.sp,
+                                fontSize = 10.5.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = if (auditTokens.isNotEmpty()) Color.White
-                                else if (isAuditSelected) WhatsAppGreen else Color.White
+                                else if (isAuditSelected) WhatsAppGreen else Color.White,
+                                maxLines = 1,
+                                softWrap = false
                             )
                         }
                     }
